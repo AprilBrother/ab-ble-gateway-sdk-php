@@ -6,5 +6,10 @@
             "name": "Yanc",
             "email": "yancan@aprbrother.com"
         }
-    ]
+    ],
+	"autoload": {
+		"psr-4": {
+			"AprBrother\\": "src/"
+		}
+	}
 }
