@@ -1,0 +1,10 @@
+{
+    "name": "aprbrother/ab-ble-gateway",
+    "description": "SDK for AB BLE Gateway",
+    "authors": [
+        {
+            "name": "Yanc",
+            "email": "yancan@aprbrother.com"
+        }
+    ]
+}
