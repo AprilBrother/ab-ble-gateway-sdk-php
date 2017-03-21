@@ -1,0 +1,3 @@
+```
+composer dump_autoload
+```
