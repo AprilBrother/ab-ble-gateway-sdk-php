@@ -54,7 +54,21 @@ class PacketParser {
      * @return array
      */
     public static function parseAdvertisement($payload) {
-        return array();
+        $total = strlen($payload);
+        $records = array();
+        for($i = 0; $i < $total;) {
+            $len    = $payload[$i];
+            $type   = $payload[$i + 1];
+            if (!$type) {
+                return $records;
+            }
+            $begin  = $i + 2;
+            $end    = $begin + $len - 1;
+            $data   = substr($payload, $begin, $end);
+            $records[$type] = $data;
+            $i += $len + 1;
+        }
+        return $records;
     }
 
 }
