@@ -7,7 +7,7 @@ use AprBrother\BLEAdvData;
 
 class PacketParser {
 
-    const PACKET_START          = 0xfe;
+    const PACKET_START          = "fe";
 
     const OFFSET_LENGTH         = 1;
     const OFFSET_ADV_TYPE       = 2;
@@ -22,8 +22,8 @@ class PacketParser {
      * @return array
      */
     public static function parse($packet) {
-        $lines  = $explode("\r\n", $packet);
-        $meta   = new Stdclass();
+        $lines  = explode("\r\n", $packet);
+        $meta   = (object)null;
         $advData = array();
         $tmp    = array_shift($lines);
         array_shift($lines);
@@ -33,12 +33,15 @@ class PacketParser {
         }
 
         foreach($lines as $v) {
-            if ($v[0] != self::PACKET_START) {
+            if(empty($v)) {
+                continue;
+            }
+            if ($v[0] != hex2bin(self::PACKET_START)) {
                 continue;
             }
             $data = new BLEAdvData();
-            $data->advType      = $v[OFFSET_ADV_TYPE];
-            $data->rssi         = $v[OFFSET_RSSI];
+            $data->advType      = $v[self::OFFSET_ADV_TYPE];
+            $data->rssi         = $v[self::OFFSET_RSSI];
             $data->macAddress   = substr($v, self::OFFSET_MAC_ADDRESS, BLEAdvData::MAC_ADDRESS_LEN);
             $data->rawData      = substr($v, self::OFFSET_ADV_DATA);
             $data->records       = self::parseAdvertisement($data->rawData);
@@ -57,8 +60,8 @@ class PacketParser {
         $total = strlen($payload);
         $records = array();
         for($i = 0; $i < $total;) {
-            $len    = $payload[$i];
-            $type   = $payload[$i + 1];
+            $len    = ord($payload[$i]);
+            $type   = ord($payload[$i + 1]);
             if (!$type) {
                 return $records;
             }
