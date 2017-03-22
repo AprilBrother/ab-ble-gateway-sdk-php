@@ -11,6 +11,8 @@ echo "===== meta ====\n";
 print_r($meta);
 echo "===== data ====\n";
 foreach($data as $v) {
-    print_r($v);
+    echo "mac: $v->macAddress rssi: $v->rssi adv:";
+    $parser->printHexString($v->rawData);
+    echo "\n";
 }
 echo "done\n";

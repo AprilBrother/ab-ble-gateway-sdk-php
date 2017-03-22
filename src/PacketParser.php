@@ -77,6 +77,7 @@ class PacketParser {
     public static function printHexString($value) {
         $len    = strlen($value);
         $i      = 0;
+        $hex    = "";
         do {
             $hex .= sprintf("%02X", ord($value{$i}));
             $i++;
