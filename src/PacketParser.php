@@ -42,7 +42,7 @@ class PacketParser {
             $data = new BLEAdvData();
             $data->advType      = ord($v[self::OFFSET_ADV_TYPE]);
             $data->rssi         = ord($v[self::OFFSET_RSSI]) - 255;
-            $data->macAddress   = bin2hex(substr($v, self::OFFSET_MAC_ADDRESS, BLEAdvData::MAC_ADDRESS_LEN));
+            $data->macAddress   = strtoupper(bin2hex(substr($v, self::OFFSET_MAC_ADDRESS, BLEAdvData::MAC_ADDRESS_LEN)));
             $data->rawData      = substr($v, self::OFFSET_ADV_DATA);
             $data->records       = self::parseAdvertisement($data->rawData);
             $advData[]          = $data;
