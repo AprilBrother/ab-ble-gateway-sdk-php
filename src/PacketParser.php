@@ -108,6 +108,8 @@ class PacketParser {
     }
 
     /**
+     * @TODO
+     *
      * @return bool
      */
     public static function isEddystoneUid(BLEAdvData $adv) {
@@ -115,6 +117,7 @@ class PacketParser {
     }
 
     /**
+     * @TODO
      * @return bool
      */
     public static function isEddystoneUrl(BLEAdvData $adv) {
@@ -122,9 +125,18 @@ class PacketParser {
     }
 
     /**
+     * @TODO
      * @return bool
      */
-    public static function isEddystoneTlm(BLEAdvData $adv) {
+    public static function isEddystoneTlmEncrypted(BLEAdvData $adv) {
+        return false;
+    }
+
+    /**
+     * @TODO
+     * @return bool
+     */
+    public static function isEddystoneTlmUnencrypted(BLEAdvData $adv) {
         return false;
     }
 
