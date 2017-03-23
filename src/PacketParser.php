@@ -16,6 +16,10 @@ class PacketParser {
     const OFFSET_RSSI           = 9;
     const OFFSET_ADV_DATA       = 10;
 
+    const LEN_ADV_IBEACON       = 30;
+
+    const PREFIX_ADV_IBEACON    = "0201061AFF4C000215";
+
     /**
      * Parse packet from AB BLE Gateway
      * 
@@ -75,7 +79,7 @@ class PacketParser {
         return $records;
     }
 
-    public static function printHexString($value) {
+    public static function hexString($value) {
         $len    = strlen($value);
         $i      = 0;
         $hex    = "";
@@ -83,21 +87,43 @@ class PacketParser {
             $hex .= sprintf("%02X", ord($value{$i}));
             $i++;
         } while ($i < $len);
-        echo $hex;
+        return $hex;
     }
 
+    /**
+     * @return bool
+     */
     public static function isIbeacon(BLEAdvData $adv) {
-        return false;
+        if (strlen($adv->rawData) < self::LEN_ADV_IBEACON) {
+            return false;
+        }
+
+        $hexString = self::hexString($adv->rawData);
+        $prefixLen = strlen(self::PREFIX_ADV_IBEACON);
+        if(substr($hexString, 0, $prefixLen) == self::PREFIX_ADV_IBEACON) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
+    /**
+     * @return bool
+     */
     public static function isEddystoneUid(BLEAdvData $adv) {
         return false;
     }
 
+    /**
+     * @return bool
+     */
     public static function isEddystoneUrl(BLEAdvData $adv) {
         return false;
     }
 
+    /**
+     * @return bool
+     */
     public static function isEddystoneTlm(BLEAdvData $adv) {
         return false;
     }

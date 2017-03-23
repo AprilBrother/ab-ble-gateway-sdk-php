@@ -11,8 +11,9 @@ echo "===== meta ====\n";
 print_r($meta);
 echo "===== data ====\n";
 foreach($data as $v) {
-    echo "mac: $v->macAddress rssi: $v->rssi adv:";
-    $parser->printHexString($v->rawData);
+    $iBeacon = (int)$parser->isIbeacon($v);
+    echo "mac: $v->macAddress rssi: $v->rssi iBeacon: $iBeacon adv:";
+    echo $parser->hexString($v->rawData);
     echo "\n";
 }
 echo "done\n";
