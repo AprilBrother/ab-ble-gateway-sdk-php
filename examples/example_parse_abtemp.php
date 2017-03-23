@@ -11,8 +11,11 @@ echo "===== meta ====\n";
 print_r($meta);
 echo "===== data ====\n";
 foreach($data as $v) {
-    echo "mac: $v->macAddress rssi: $v->rssi adv:";
-    $parser->printHexString($v->rawData);
-    echo "\n";
+    $beacon = $parser->parseIbeacon($v);
+    if (empty($beacon)) {
+        continue;
+    }
+    $uuidString = $parser->hexString($beacon->uuid);
+    echo "uuid: $uuidString major: $beacon->major minor: $beacon->minor\n";
 }
 echo "done\n";

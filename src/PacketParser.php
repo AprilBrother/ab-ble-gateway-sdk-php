@@ -4,7 +4,6 @@ namespace AprBrother;
 
 use AprBrother\BLEAdvType;
 use AprBrother\BLEAdvData;
-use AprBrother\Beacon;
 
 class PacketParser {
 
@@ -16,7 +15,15 @@ class PacketParser {
     const OFFSET_RSSI           = 9;
     const OFFSET_ADV_DATA       = 10;
 
+    const OFFSET_UUID           = 4;
+    const OFFSET_MAJOR          = 20;
+    const OFFSET_MINOR          = 22;
+    const OFFSET_MEASURED_POWER = 24;
+
     const LEN_ADV_IBEACON       = 30;
+    const LEN_UUID              = 16;
+    const LEN_MAJOR             = 2;
+    const LEN_MINOR             = 2;
 
     const PREFIX_ADV_IBEACON    = "0201061AFF4C000215";
 
@@ -138,6 +145,29 @@ class PacketParser {
      */
     public static function isEddystoneTlmUnencrypted(BLEAdvData $adv) {
         return false;
+    }
+
+    /**
+     * 
+     * @return Ibeacon object or null
+     */
+    public static function parseIbeacon(BLEAdvData $adv) {
+        if (!self::isIbeacon($adv)) {
+            return null;    
+        }
+
+        $beacon = new Beacon\Ibeacon();
+        $beacon->macAddress = $adv->macAddress;
+        $beacon->rssi       = $adv->rssi;
+        $manufactureData    = $adv->getRecord(BLEAdvType::MANUFACTURER_SPECIFIC_DATA);
+        $beacon->uuid       = substr($manufactureData, self::OFFSET_UUID, self::LEN_UUID);
+        $major              = substr($manufactureData, self::OFFSET_MAJOR, self::LEN_MAJOR);
+        $beacon->major      = hexdec(bin2hex($major));
+        $minor              = substr($manufactureData, self::OFFSET_MINOR, self::LEN_MINOR);
+        $beacon->minor      = hexdec(bin2hex($minor));
+        $beacon->measuredPower = ord($manufactureData[self::OFFSET_MEASURED_POWER]) - 255;
+
+        return $beacon;
     }
 
 }
