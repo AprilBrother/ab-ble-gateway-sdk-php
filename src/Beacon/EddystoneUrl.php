@@ -2,6 +2,6 @@
 
 namespace AprBrother\Beacon;
 
-class EddystoneUrl {
+class EddystoneUrl extends Beacon {
 
 }

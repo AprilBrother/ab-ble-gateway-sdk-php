@@ -2,6 +2,6 @@
 
 namespace AprBrother\Beacon;
 
-class EddystoneTlm {
+class EddystoneTlm extends Beacon {
 
 }

@@ -2,5 +2,11 @@
 
 namespace AprBrother\Beacon;
 
-class Ibeacon {
+class Ibeacon extends Beacon {
+
+    public $uuid;
+    public $major;
+    public $minor;
+    public $measuredPower;
+
 }
