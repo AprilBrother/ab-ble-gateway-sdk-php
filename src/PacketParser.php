@@ -4,6 +4,7 @@ namespace AprBrother;
 
 use AprBrother\BLEAdvType;
 use AprBrother\BLEAdvData;
+use AprBrother\Beacon;
 
 class PacketParser {
 
@@ -83,6 +84,22 @@ class PacketParser {
             $i++;
         } while ($i < $len);
         echo $hex;
+    }
+
+    public static function isIbeacon(BLEAdvData $adv) {
+        return false;
+    }
+
+    public static function isEddystoneUid(BLEAdvData $adv) {
+        return false;
+    }
+
+    public static function isEddystoneUrl(BLEAdvData $adv) {
+        return false;
+    }
+
+    public static function isEddystoneTlm(BLEAdvData $adv) {
+        return false;
     }
 
 }
