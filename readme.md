@@ -14,3 +14,4 @@ composer require aprbrother/ab-ble-gateway
 $parser = new AprBrother\PacketParser();
 list($meta, $data) = $parser->parse($content);
 ```
+
