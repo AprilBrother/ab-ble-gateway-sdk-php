@@ -9,6 +9,9 @@ $mqttclient->onConnect(function() use ($mqttclient){
 	$mqttclient->subscribe('beacons',0);
 });
 $mqttclient->onMessage(function($message) use($mqttclient){
+	//echo "===== RAW message ====\n";
+    //echo PacketParser::hexString($message->payload);
+
 	list($meta, $data) = PacketParser::parse($message->payload);
 
 	echo "===== meta ====\n";
