@@ -30,6 +30,7 @@ class PacketParser {
 
     const LEN_ADV_IBEACON       = 30;
     const LEN_ADV_EDDYSTONE_UID = 31;
+    const LEN_ADV_MIN_EDDYSTONE_URL = 14;
 
     const LEN_UUID              = 16;
     const LEN_MAJOR             = 2;
@@ -141,10 +142,16 @@ class PacketParser {
     }
 
     /**
+     * Check is eddystone URL
+     *
      * @TODO
      * @return bool
      */
     public static function isEddystoneUrl(BLEAdvData $adv) {
+        if (strlen($adv->rawData) < self::LEN_ADV_MIN_EDDYSTONE_URL) {
+            return false;
+        }
+        $hexString = self::hexString($adv->rawData);
         return false;
     }
 
