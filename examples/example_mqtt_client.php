@@ -9,12 +9,12 @@ $mqttclient->onConnect(function() use ($mqttclient){
 	$mqttclient->subscribe('beacons',0);
 });
 $mqttclient->onMessage(function($message) use($mqttclient){
-	//echo "===== RAW message ====\n";
-    //echo PacketParser::hexString($message->payload);
+	echo "===== RAW message ====\n";
+    echo PacketParser::hexString($message->payload);
 
 	list($meta, $data) = PacketParser::parse($message->payload);
 
-	echo "===== meta ====\n";
+	echo "\n===== meta ====\n";
 	print_r($meta);
 	echo "===== data ====\n";
 	foreach($data as $v) {
@@ -25,9 +25,9 @@ $mqttclient->onMessage(function($message) use($mqttclient){
 	}
 });
 $mqttclient->onLog(function($level,$msg)use($mqttclient){
-//	echo "\n";
-//	echo $msg;
-//	echo "\n";
+	echo "\n";
+	echo $msg;
+	echo "\n";
 });
 $mqttclient->connect('127.0.0.1',1883,60);
 $mqttclient->loopforever();

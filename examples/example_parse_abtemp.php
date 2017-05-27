@@ -2,6 +2,8 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
+// The example can only work with our ABTemp sensor
+// https://blog.aprbrother.com/product/temperature-sensor-ibeacon-beacon-base-station
 const TEMPERATURE_UUID = "B5B182C7EAB14988AA99B5C1517008D9";
 
 $sampleFile = __DIR__ . '/sample_data.txt';
