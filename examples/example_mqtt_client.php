@@ -25,9 +25,11 @@ $mqttclient->onMessage(function($message) use($mqttclient){
 	}
 });
 $mqttclient->onLog(function($level,$msg)use($mqttclient){
+    /*
 	echo "\n";
 	echo $msg;
 	echo "\n";
+     */
 });
 $mqttclient->connect('127.0.0.1',1883,60);
 $mqttclient->loopforever();
