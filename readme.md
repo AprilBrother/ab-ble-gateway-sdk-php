@@ -5,7 +5,7 @@ PHP SDK for AB BLE Gateway
 * Install composer
 * Run 
 ```
-composer require aprbrother/ab-ble-gateway
+composer require aprbrother/ab-ble-gateway=dev-master
 ```
 
 ## Usage
