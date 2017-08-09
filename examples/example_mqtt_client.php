@@ -1,12 +1,16 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
 
+const TOPIC = "/asensor";
+const HOST = "mqtt.bconimg.com";
+const PORT = 1883;
+
 use AprBrother\PacketParser;
 
 $mqttclient = new Mosquitto\Client;
 $mqttclient->onConnect(function() use ($mqttclient){
 	echo "connect success \n";
-	$mqttclient->subscribe('beacons',0);
+	$mqttclient->subscribe(TOPIC, 0);
 });
 $mqttclient->onMessage(function($message) use($mqttclient){
 	echo "===== RAW message ====\n";
@@ -31,5 +35,5 @@ $mqttclient->onLog(function($level,$msg)use($mqttclient){
 	echo "\n";
      */
 });
-$mqttclient->connect('192.168.31.73',1883,60);
+$mqttclient->connect(HOST,PORT,60);
 $mqttclient->loopforever();
