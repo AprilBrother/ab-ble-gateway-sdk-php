@@ -31,5 +31,5 @@ $mqttclient->onLog(function($level,$msg)use($mqttclient){
 	echo "\n";
      */
 });
-$mqttclient->connect('192.168.31.73',1883,60);
+$mqttclient->connect('192.168.1.11',1883,60);
 $mqttclient->loopforever();
