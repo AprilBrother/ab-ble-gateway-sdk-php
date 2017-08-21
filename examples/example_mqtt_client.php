@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
 
-const TOPIC = "/asensor";
+const TOPIC = "beacons";
 const HOST = "mqtt.bconimg.com";
 const PORT = 1883;
 
