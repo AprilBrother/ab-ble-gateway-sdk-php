@@ -49,7 +49,7 @@ $mqttclient->onMessage(function($message) use($mqttclient){
         $minor      = sprintf("%04X", $beacon->minor);
         $moisture    = hexdec(substr($minor, 0, 2));
         $temperature = hexdec(substr($minor, 2, 4));
-        echo "mac $beacon->macAddress uuid: $uuidString major: $beacon->major minor: $beacon->minor moisture: $moisture temperature: $temperature\n";
+        echo "mac $beacon->macAddress $beacon->major minor: $beacon->minor moisture: $moisture temperature: $temperature\n";
     }
 });
 
