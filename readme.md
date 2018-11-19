@@ -13,9 +13,14 @@ composer require aprbrother/ab-ble-gateway=dev-master
 ### Gateway V4 ###
 
 ```
-$parser = new AprBrother\PacketParser4();
-$data = $parser->parse($content);
-var_dump($data);
+$parser     = new AprBrother\PacketParser4();
+$meta       = $parser->parse($content);
+$rawData    = $meta['devices'];
+$data       = [];
+unset($meta['devices']);
+foreach($rawData as $v) {
+    $data[] = $parser->parse($v);
+}
 ```
 
 ### Gateway V2 or V3 ###
