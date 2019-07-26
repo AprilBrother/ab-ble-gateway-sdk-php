@@ -16,3 +16,9 @@ cd ..
 composer dump_autoload
 php example_parse.php
 ```
+
+For MQTT example, install mosquitto extension first
+
+```
+pecl install mosquitto
+```
