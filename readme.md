@@ -8,6 +8,10 @@ PHP SDK for AB BLE Gateway
 composer require aprbrother/ab-ble-gateway=dev-master
 ```
 
+For BLE Gateway V4, you should install msgpack extension also
+
+`pecl install msgpack`
+
 ## Usage
 
 ### Gateway V4 ###
